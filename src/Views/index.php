@@ -115,7 +115,6 @@
                 },
             },
             errorPlacement: function (error, element) {
-                console.log('here')
                 element[0].setCustomValidity('')
                 var invalidFeedback = element.parents('.form-group').find('.invalid-feedback');
                 form.addClass('was-validated');
@@ -123,7 +122,6 @@
                 element[0].setCustomValidity('invalid')
             },
             success: function (label) {
-                console.log('here')
                 var inputName = label.attr('for');
                 let inputElement;
                 if (inputName.includes('password-main')) {
