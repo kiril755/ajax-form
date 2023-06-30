@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  php:
+    build:
+      context: docker/php/
+    volumes:
+      - "./src:/var/www/html"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - "./src:/var/www/html"
+      - "./docker/nginx/conf.d:/etc/nginx/conf.d"
+
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - './docker/volume/mysql:/var/lib/mysql'
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8081:80
+    environment:
+      - VIRTUAL_HOST=phpmyadmin.local
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
